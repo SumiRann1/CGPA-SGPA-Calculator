@@ -21,9 +21,6 @@ st.divider()
 if "last_sgpa" not in st.session_state:
     st.session_state["last_sgpa"] = None
 
-if "last_cgpa" not in st.session_state:
-    st.session_state["last_cgpa"] = None
-
 if "courses" not in st.session_state:
     st.session_state["courses"] = []
 
@@ -76,30 +73,6 @@ if submitted:
 
     st.success(f"🎯 **SGPA Obtained: {sgpa}**")
 
-# if sem > 1 and submitted:
-#     with st.form("cgpa_form"):
-#         cgpa_data = []
-#         for j in range(sem - 1):
-#             st.header(f"SEMESTER {j+1}")
-#             cgpa_sem = st.number_input(f"Grades Obtained in SEMESTER {j+1} :", min_value= 0.00, step = 0.01)
-#             cgpa_data.append(cgpa_sem)
-#         cgpa_data.append(sgpa)
-#         submit = st.form_submit_button("📊 Calculate CGPA")
-
-#     if submit:
-#         cgpa = round(sum(cgpa_data)/sem)
-#         print(cgpa)
-#         st.session_state["last_cgpa"] = cgpa
-#         st.session_state["cgpa_data"] = cgpa_data
-
-#         st.success(f"🎯 **CGPA Obtained: {cgpa}**")
-
-# if sem == 1 and submitted:
-#     st.session_state["last_cgpa"] = sgpa
-#     st.session_state["cgpa_data"] = [sgpa]
-
-#     st.success(f"🎯 **CGPA Obtained: {sgpa}**")
-
 if st.session_state["last_sgpa"] is not None:
     st.divider()
     st.subheader("📁 Saved Result")
@@ -109,7 +82,6 @@ if st.session_state["last_sgpa"] is not None:
         "Semester": st.session_state["sem"],
         "Graded Courses Taken": st.session_state["graded_courses_taken"],
         "SGPA Obtained": st.session_state["last_sgpa"],
-        # "CGPA Obtained": st.session_state["last_cgpa"],
     }
 
     st.dataframe(pd.DataFrame([user_data]), use_container_width=True)
@@ -119,8 +91,6 @@ if st.session_state["last_sgpa"] is not None:
         columns=["Credits", "Grade"]
     )
     st.dataframe(df, use_container_width=True)
-
-    # st.info(f"Stored SGPA: {st.session_state['last_sgpa']}")
 
 # sum, total_credits = 0,0
 
@@ -145,4 +115,5 @@ if st.session_state["last_sgpa"] is not None:
 #         st.write(sum/total_credits)
 # st.header(f"SGPA Obtained : {sum/total_credits}")
     
+
 
